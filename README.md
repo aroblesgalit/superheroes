@@ -1,7 +1,7 @@
 # Superheroes
 > A game application where users can battle against other users on an automatic, one-on-one match using a superhero from an existing list or of their own.
 
-This is a revamp of [my first solo project](https://github.com/aroblesgalit/champ-unite) after my coding bootcamp in June 2020 using NextJS. Superheroes is for everyone who enjoys superheroes and card games. I used the [Superhero API](https://superheroapi.com/index.html) to get the characters' powerstats to calculate their Attack and Defense which will be important components during a one-on-one battle against other users. Users can also easily create their own superheroes if they wish to.
+This is a revamp of [my first solo project](https://github.com/aroblesgalit/champ-unite) after my coding bootcamp in June 2020. NextJS was used to learn more about the Fullstack framework. Superheroes is for everyone who enjoys superheroes and card games. I used the [Superhero API](https://superheroapi.com/index.html) to get the characters' powerstats to calculate their Attack and Defense which will be important components during a one-on-one battle against other users. Users can also easily create their own superheroes if they wish to.
 
 
 ## Deployed Application / Live Demo
