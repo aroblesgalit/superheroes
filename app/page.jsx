@@ -1,6 +1,11 @@
+import SuperheroCards from '@components/SuperheroCards';
+
 const Home = () => {
   return (
-    <div>Home</div>
+    <section>
+      <h1>Superheroes</h1>
+      <SuperheroCards />
+    </section>
   )
 }
 
