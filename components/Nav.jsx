@@ -9,7 +9,12 @@ const Nav = () => {
   return (
     <nav className='flex-between w-full mb-16'>
       <Link href='/' className='flex gap-2 flex-center'>
-        Home
+        <Image 
+          src='/assets/images/superheroes-logo-black.svg'
+          alt="Superheroes logo"
+          width={230}
+          height={48}
+        />
       </Link>
     </nav>
   )
