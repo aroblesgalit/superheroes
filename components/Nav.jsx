@@ -7,15 +7,18 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 const Nav = () => {
   return (
-    <nav className='flex-between w-full mb-16'>
-      <Link href='/' className='flex gap-2 flex-center'>
-        <Image 
-          src='/assets/images/superheroes-logo-black.svg'
-          alt="Superheroes logo"
-          width={230}
-          height={48}
-        />
-      </Link>
+    <nav className='w-full bg-primary-red flex justify-center'>
+      <div className='flex-between px-10 py-3 w-full max-w-7xl'>
+        <Link href='/' className='flex gap-2 flex-center'>
+          <Image 
+            src='/assets/images/superheroes-logo-white.svg'
+            alt="Superheroes logo"
+            width={230}
+            height={48}
+          />
+        </Link>
+      </div>
+      
     </nav>
   )
 }
