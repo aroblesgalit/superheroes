@@ -6,19 +6,19 @@ import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 const Nav = () => {
-  const isUserLoggedIn = true;
+  const { data: session } = useSession();
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false)
 
   useEffect(() => {
-    const fetchProviders = async () => {
+    const setUpProviders = async () => {
       const response = await getProviders();
 
       setProviders(response);
     }
 
-    fetchProviders();
+    setUpProviders();
   }, [])
 
   return (
@@ -37,7 +37,7 @@ const Nav = () => {
         {/* Desktop navigation */}
         <div className='sm:flex hidden'>
           {
-            isUserLoggedIn ? (
+            session?.user ? (
               <div className='flex items-center gap-3 md:gap-5 text-primary-white text-sm'>
                 <Link href='/collection'>
                   Collection
@@ -82,7 +82,7 @@ const Nav = () => {
         {/* Mobile navigation */}
         <div className='sm:hidden flex items-center relative text-sm text-primary-white'>
           {
-            isUserLoggedIn ? (
+            session?.user ? (
               <div className="flex">
                 <Image 
                   src='/assets/images/superheroes-icon-red.svg'
