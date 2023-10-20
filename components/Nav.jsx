@@ -57,7 +57,10 @@ const Nav = () => {
                 </Link>
               </div>
             ) : (
-              <>
+              <div className='flex items-center gap-3 md:gap-5 text-primary-white text-sm'>
+                <Link href='/collection'>
+                  Collection
+                </Link>
                 {
                   providers && 
                   Object.values(providers).map((provider) => (
@@ -65,13 +68,13 @@ const Nav = () => {
                       type='button'
                       key={provider.name}
                       onClick={() => signIn(provider.id)}
-                      className='border rounded-full px-5 py-1.5 bg-primary-white transition-all hover:bg-primary-black hover:border-primary-black'
+                      className='border rounded-full px-5 py-1.5 bg-primary-white text-primary-black transition-all hover:bg-primary-black hover:border-primary-black'
                     >
                       Sign in
                     </button>
                   ))
                 }
-              </>
+              </div>
             )
           }
         </div>
@@ -129,7 +132,7 @@ const Nav = () => {
                       type='button'
                       key={provider.name}
                       onClick={() => signIn(provider.id)}
-                      className='border rounded-full px-5 py-1.5 bg-primary-white transition-all hover:bg-primary-black hover:border-primary-black'
+                      className='border rounded-full px-5 py-1.5 bg-primary-white text-primary-black transition-all hover:bg-primary-black hover:border-primary-black'
                     >
                       Sign in
                     </button>
