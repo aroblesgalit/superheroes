@@ -42,7 +42,7 @@ const Nav = () => {
                 <button
                   type='button'
                   onClick={signOut}
-                  className='border rounded-full px-5 py-1.5 transition-all hover:bg-primary-black hover:border-primary-black'
+                  className='border rounded-full px-5 py-1.5 transition-all hover:text-primary-white hover:bg-primary-black hover:border-primary-black'
                 >
                   Sign out
                 </button>
@@ -68,7 +68,7 @@ const Nav = () => {
                       type='button'
                       key={provider.name}
                       onClick={() => signIn(provider.id)}
-                      className='border rounded-full px-5 py-1.5 bg-primary-white text-primary-black transition-all hover:bg-primary-black hover:border-primary-black'
+                      className='border rounded-full px-5 py-1.5 bg-primary-white text-primary-black transition-all hover:text-primary-white hover:bg-primary-black hover:border-primary-black'
                     >
                       Sign in
                     </button>
@@ -115,7 +115,7 @@ const Nav = () => {
                           setToggleDropdown(false);
                           signOut();
                         }}
-                        className='mt-5 w-full border rounded-full px-5 py-1.5 transition-all hover:bg-primary-black hover:border-primary-black'
+                        className='mt-5 w-full border rounded-full px-5 py-1.5 transition-all hover:text-primary-white hover:bg-primary-black hover:border-primary-black'
                       >
                         Sign out
                       </button>
@@ -132,7 +132,7 @@ const Nav = () => {
                       type='button'
                       key={provider.name}
                       onClick={() => signIn(provider.id)}
-                      className='border rounded-full px-5 py-1.5 bg-primary-white text-primary-black transition-all hover:bg-primary-black hover:border-primary-black'
+                      className='border rounded-full px-5 py-1.5 bg-primary-white text-primary-black transition-all hover:text-primary-white hover:bg-primary-black hover:border-primary-black'
                     >
                       Sign in
                     </button>
