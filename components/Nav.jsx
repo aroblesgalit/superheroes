@@ -9,6 +9,7 @@ const Nav = () => {
   const isUserLoggedIn = true;
 
   const [providers, setProviders] = useState(null);
+  const [toggleDropdown, setToggleDropdown] = useState(false)
 
   useEffect(() => {
     const fetchProviders = async () => {
@@ -89,8 +90,21 @@ const Nav = () => {
                   height={32}
                   className='rounded-full bg-primary-white'
                   alt='profile'
-                  onClick={() => {}}
+                  onClick={() => setToggleDropdown((prev) => !prev)}
                 />
+                {
+                  toggleDropdown && (
+                    <div className='absolute right-0 top-full mt-3 w-full p-5 rounded-md bg-primary-red min-w-[210px] flex flex-col gap-2 justify-end items-end'>
+                      <Link
+                        href='/profile'
+                        className='text-sm text-primary-white'
+                        onClick={() => setToggleDropdown(false)}
+                      >
+                        My profile
+                      </Link>
+                    </div>
+                  )
+                }
               </div>
             ) : (
               <>
