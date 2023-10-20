@@ -62,16 +62,50 @@ const Nav = () => {
               <>
                 {
                   providers && 
-                    Object.values(providers).map((provider) => (
-                      <button
-                        type='button'
-                        key={provider.name}
-                        onClick={() => signIn(provider.id)}
-                        className='border rounded-full px-5 py-1.5 bg-primary-white transition-all hover:bg-primary-black hover:border-primary-black'
-                      >
-                        Sign in
-                      </button>
-                    ))
+                  Object.values(providers).map((provider) => (
+                    <button
+                      type='button'
+                      key={provider.name}
+                      onClick={() => signIn(provider.id)}
+                      className='border rounded-full px-5 py-1.5 bg-primary-white transition-all hover:bg-primary-black hover:border-primary-black'
+                    >
+                      Sign in
+                    </button>
+                  ))
+                }
+              </>
+            )
+          }
+        </div>
+
+        {/* Mobile navigation */}
+        <div className='sm:hidden flex items-center relative'>
+          {
+            isUserLoggedIn ? (
+              <div className="flex">
+                <Image 
+                  src='/assets/images/superheroes-icon-red.svg'
+                  width={32}
+                  height={32}
+                  className='rounded-full bg-primary-white'
+                  alt='profile'
+                  onClick={() => {}}
+                />
+              </div>
+            ) : (
+              <>
+                {
+                  providers && 
+                  Object.values(providers).map((provider) => (
+                    <button
+                      type='button'
+                      key={provider.name}
+                      onClick={() => signIn(provider.id)}
+                      className='border rounded-full px-5 py-1.5 bg-primary-white transition-all hover:bg-primary-black hover:border-primary-black'
+                    >
+                      Sign in
+                    </button>
+                  ))
                 }
               </>
             )
