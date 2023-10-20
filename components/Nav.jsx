@@ -6,18 +6,35 @@ import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 const Nav = () => {
+  const isUserLoggedIn = true;
+
   return (
     <nav className='w-full bg-primary-red flex justify-center'>
       <div className='md:px-10 px-2 py-3 w-full max-w-7xl flex justify-between'>
         <Link href='/' className='flex items-center'>
           <Image 
             src='/assets/images/superheroes-icon-white.svg'
-            alt="Superheroes logo"
+            alt='Superheroes logo'
             width={32}
             height={32}
           />
           <p className='font-anton text-primary-white text-xl max-sm:hidden'>Superheroes</p>
         </Link>
+
+        {/* Desktop navigation */}
+        <div className='sm:flex hidden'>
+          {
+            isUserLoggedIn ? (
+              <div className='flex items-center gap-3 md:gap-5 text-primary-white'>
+                <Link href='/collection'>
+                  Collection
+                </Link>
+              </div>
+            ) : (
+              <></>
+            )
+          }
+        </div>
       </div>
       
     </nav>
