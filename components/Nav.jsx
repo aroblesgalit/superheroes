@@ -80,7 +80,7 @@ const Nav = () => {
         </div>
 
         {/* Mobile navigation */}
-        <div className='sm:hidden flex items-center relative'>
+        <div className='sm:hidden flex items-center relative text-sm text-primary-white'>
           {
             isUserLoggedIn ? (
               <div className="flex">
@@ -102,6 +102,23 @@ const Nav = () => {
                       >
                         My profile
                       </Link>
+                      <Link
+                        href='/collection'
+                        className='text-sm text-primary-white'
+                        onClick={() => setToggleDropdown(false)}
+                      >
+                        Collection
+                      </Link>
+                      <button
+                        type='button'
+                        onClick={() => {
+                          setToggleDropdown(false);
+                          signOut();
+                        }}
+                        className='mt-5 w-full border rounded-full px-5 py-1.5 transition-all hover:bg-primary-black hover:border-primary-black'
+                      >
+                        Sign out
+                      </button>
                     </div>
                   )
                 }
