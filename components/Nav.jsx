@@ -36,6 +36,15 @@ const Nav = () => {
                 >
                   Sign out
                 </button>
+                <Link href='/profile'>
+                  <Image 
+                    src='/assets/images/superheroes-icon-red.svg'
+                    width={32}
+                    height={32}
+                    className='rounded-full bg-primary-white'
+                    alt='profile'
+                  />
+                </Link>
               </div>
             ) : (
               <></>
