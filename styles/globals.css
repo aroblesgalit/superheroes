@@ -15,11 +15,19 @@ font-family: 'Anton', sans-serif;
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: 'Neucha', cursive;
+}
+
 main {
   width: 100vw;
   min-height: 100vh;
 }
 
+.page_title {
+  font-size: 52px;
+  font-family: 'Anton', sans-serif;
+}
 
 /* Nav */
 

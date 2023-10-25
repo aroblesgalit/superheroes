@@ -10,15 +10,20 @@ const Collection = () => {
   const [query, setQuery] = useState('')
 
   const searchSuperheroes = () => {
-    
+
   }
   return (
-    <SearchBar
-      type='superheroes'
-      query={query}
-      setQuery={setQuery}
-      handleSubmit={searchSuperheroes}
-    />
+    <section className='md:px-10 px-2 py-3 w-full max-w-7xl'>
+      <div className='flex items-center gap-6'>
+        <h1 className='page_title'>Search superheroes</h1>
+        <SearchBar
+          type='superheroes'
+          query={query}
+          setQuery={setQuery}
+          handleSubmit={searchSuperheroes}
+        />
+      </div>
+    </section>
   )
 }
 
