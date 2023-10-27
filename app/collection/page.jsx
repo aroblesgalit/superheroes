@@ -9,8 +9,18 @@ import SearchBar from '@components/SearchBar';
 const Collection = () => {
   const [query, setQuery] = useState('')
 
-  const searchSuperheroes = () => {
+  const searchSuperheroes = async (e) => {
+    e.preventDefault();
 
+    try {
+
+      const response = await fetch(`/api/superheroes/search/${query}`);
+      const data = await response.json();
+      console.log(data);
+      
+    } catch (error) {
+      console.error(error.message);
+    }
   }
   return (
     <section className='md:px-10 px-2 py-3 w-full max-w-7xl'>
