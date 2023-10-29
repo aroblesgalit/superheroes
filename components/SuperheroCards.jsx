@@ -1,6 +1,18 @@
-const SuperheroCards = () => {
+import SuperheroCard from "./SuperheroCard";
+
+const SuperheroCards = ({ data }) => {
   return (
-    <div>SuperheroCards</div>
+    <div>
+      {
+        data.map(superhero => {
+          <SuperheroCard
+            key={superhero.id}
+            type='search'
+            superhero={superhero}
+          />
+        })
+      }
+    </div>
   )
 }
 
