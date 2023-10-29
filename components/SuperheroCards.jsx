@@ -3,14 +3,15 @@ import SuperheroCard from "./SuperheroCard";
 const SuperheroCards = ({ data }) => {
   return (
     <div>
+      SuperheroCards
       {
-        data.map(superhero => {
+        data && data.map((superhero) => (
           <SuperheroCard
             key={superhero.id}
             type='search'
             superhero={superhero}
           />
-        })
+        ))
       }
     </div>
   )

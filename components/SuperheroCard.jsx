@@ -1,11 +1,12 @@
-const SuperheroCard = ({ type, id, name, image, attack, defense, appearance, biography, powerstats }) => {
+const SuperheroCard = ({ type, superhero }) => {
   return (
     <div className="card">
       <div className="card_inner">
         <div className="card_front">
           <div className="superhero_main">
-            <div className="superhero_name">{name}</div>
-            <div className="superhero_alignment">{biography.alignment}</div>
+            SuperheroCard
+            <div className="superhero_name">{superhero.name}</div>
+            <div className="superhero_alignment">{superhero.biography.alignment}</div>
           </div>
         </div>
         <div className="card_back">Card back</div>

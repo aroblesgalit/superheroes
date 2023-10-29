@@ -5,9 +5,14 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 import SearchBar from '@components/SearchBar';
+import SuperheroCards from '@components/SuperheroCards';
 
 const Collection = () => {
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState('');
+  const [superheroes, setSuperheroes] = useState({
+    db: [],
+    searchResults: [],
+  });
 
   const searchSuperheroes = async (e) => {
     e.preventDefault();
@@ -16,7 +21,11 @@ const Collection = () => {
 
       const response = await fetch(`/api/superheroes/search/${query}`);
       const data = await response.json();
-      console.log(data);
+      console.log(data.results);
+      setSuperheroes({
+        ...superheroes,
+        searchResults: data.results
+      })
       
     } catch (error) {
       console.error(error.message);
@@ -33,6 +42,9 @@ const Collection = () => {
           handleSubmit={searchSuperheroes}
         />
       </div>
+      <SuperheroCards 
+        data={superheroes.searchResults}
+      />
     </section>
   )
 }
