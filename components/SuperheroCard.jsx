@@ -1,11 +1,27 @@
-const SuperheroCard = () => {
+const SuperheroCard = ({ type, id, name, image, attack, defense, appearance, biography, powerstats }) => {
   return (
-    <div>SuperheroCard</div>
+    <div className="card">
+      <div className="card_inner">
+        <div className="card_front">
+          <div className="superhero_main">
+            <div className="superhero_name">{name}</div>
+            <div className="superhero_alignment">{biography.alignment}</div>
+          </div>
+        </div>
+        <div className="card_back">Card back</div>
+      </div>
+    </div>
   )
 }
 
 export default SuperheroCard
 
+// Custom
+// type: STRING - search | user | battle
+// attack: INT - based on average of selected powerstats (combat, power, strength)
+// defense: INT - based on average of selected powerstats (durability, intelligence, speed)
+
+// API
 // appearance > race: STRING
 //            > gender: STRING
 //            > height: ARRAY - 0: ft in | 1: cm
