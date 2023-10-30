@@ -3,9 +3,9 @@ const SuperheroCard = ({ type, superhero }) => {
     <div className="card">
       <div className="card_inner">
         <div className="card_front">
-          <div className="superhero_main">
+          <div className="superhero_main" style={{ backgroundImage: `url(${superhero.image.url})` }}>
             <div className="superhero_name">{superhero.name}</div>
-            <div className="superhero_alignment">{superhero.biography.alignment}</div>
+            <div className="superhero_alignment">{superhero.biography.alignment == 'good' ? 'hero' : 'villain'}</div>
           </div>
         </div>
         <div className="card_back">Card back</div>

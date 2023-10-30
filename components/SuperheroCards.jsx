@@ -3,7 +3,6 @@ import SuperheroCard from "./SuperheroCard";
 const SuperheroCards = ({ data }) => {
   return (
     <div>
-      SuperheroCards
       {
         data && data.map((superhero) => (
           <SuperheroCard
