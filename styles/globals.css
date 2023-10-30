@@ -84,7 +84,7 @@ main {
 
 .top_left_dec {
   height: 10px;
-  width: 75%;
+  width: 30%;
   background-color: #4484bc;
   position: absolute;
   top: -3px;
@@ -97,14 +97,14 @@ main {
   background-color: #4484bc;
   position: absolute;
   top: 0;
-  right: -10px;
-  left: 50%;
+  right: 0;
+  left: 0;
   bottom: -3px;
   border: 3px solid rgba(55, 65, 81, 0.85);
   border-top: 0;
   border-left: 0;
   transform-origin: bottom;
-  transform: skew(-40deg);
+  transform: skew(-45deg);
 }
 
 .superhero_name {
@@ -143,10 +143,10 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  right: 50%;
+  right: 0;
   bottom: 0;
   transform-origin: top;
-  transform: skew(-40deg);
+  transform: skew(-45deg);
 }
 
 .superhero_alignment > span {
