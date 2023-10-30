@@ -1,10 +1,25 @@
+'use client';
+
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRepeat } from '@fortawesome/free-solid-svg-icons';
+
 const SuperheroCard = ({ type, superhero }) => {
+  const [flipped, setFlipped] = useState(false);
+
   return (
-    <div className="card">
+    <div className={`card ${flipped && 'flip'}`}>
       <div className="card_inner">
         <div className="card_front">
           <div className="superhero_main" style={{ backgroundImage: `url(${superhero.image.url})` }}>
-            <div className="superhero_name">{superhero.name}</div>
+            <div className="superhero_name">
+              {superhero.name}
+              <FontAwesomeIcon
+                icon={faRepeat}
+                className='fas fa-repeat color-primary-white'
+                onClick={() => setFlipped(prev => !prev)}
+              />
+            </div>
             <div className="superhero_alignment">{superhero.biography.alignment == 'good' ? 'hero' : 'villain'}</div>
           </div>
         </div>
