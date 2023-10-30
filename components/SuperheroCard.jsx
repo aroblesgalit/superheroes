@@ -13,10 +13,10 @@ const SuperheroCard = ({ type, superhero }) => {
         <div className="card_front">
           <div className="superhero_main" style={{ backgroundImage: `url(${superhero.image.url})` }}>
             <div className="superhero_name">
-              {superhero.name}
+              <h2 className='w-3/4'>{superhero.name}</h2>
               <FontAwesomeIcon
                 icon={faRepeat}
-                className='fas fa-repeat color-primary-white'
+                className='fas fa-repeat color-primary-white cursor-pointer text-sm self-start pt-2'
                 onClick={() => setFlipped(prev => !prev)}
               />
             </div>

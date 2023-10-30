@@ -83,16 +83,21 @@ main {
 }
 
 .superhero_name {
-  height: 50px;
+  height: 60px;
   width: 100%;
-  padding: 10px;
-  font-size: 24px;
+  padding: 0 10px;
   background-color: rgba(55, 65, 81, 0.85);
   position: absolute;
   bottom: 0;
   border-bottom-left-radius: 10px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.superhero_name > h2 {
+  font-size: 24px;
+  line-height: 1em;
 }
 
 .superhero_alignment {
@@ -121,4 +126,5 @@ main {
   background-color: #374151;
   color: #f1f4fa;
   transform: rotateY(180deg);
+  padding: 10px;
 }
