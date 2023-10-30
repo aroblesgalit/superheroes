@@ -12,6 +12,7 @@ const SuperheroCard = ({ type, superhero }) => {
       <div className="card_inner">
         <div className="card_front">
           <div className="superhero_main" style={{ backgroundImage: `url(${superhero.image.url})` }}>
+            <div className="top_left_dec"></div>
             <div className="superhero_name">
               <h2 className='w-3/4'>{superhero.name}</h2>
               <FontAwesomeIcon
@@ -20,10 +21,19 @@ const SuperheroCard = ({ type, superhero }) => {
                 onClick={() => setFlipped(prev => !prev)}
               />
             </div>
-            <div className="superhero_alignment">{superhero.biography.alignment == 'good' ? 'hero' : 'villain'}</div>
+            <div className="superhero_alignment">
+              <span>{superhero.biography.alignment == 'good' ? 'hero' : 'villain'}</span>
+            </div>
           </div>
         </div>
-        <div className="card_back">Card back</div>
+        <div className="card_back">
+          Card back 
+          <FontAwesomeIcon
+            icon={faRepeat}
+            className='fas fa-repeat color-primary-white cursor-pointer text-sm self-start pt-2'
+            onClick={() => setFlipped(prev => !prev)}
+          />
+        </div>
       </div>
     </div>
   )
