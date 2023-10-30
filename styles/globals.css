@@ -37,7 +37,7 @@ main {
 /* SuperheroCard */
 .card {
   background-color: transparent;
-  width: 240px;
+  min-width: 240px;
   height: 360px;
   perspective: 1000px;
 }
