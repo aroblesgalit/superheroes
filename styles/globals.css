@@ -157,4 +157,66 @@ main {
   background-color: #374151;
   color: #f1f4fa;
   transform: rotateY(180deg);
+  overflow: hidden;
+}
+
+.superhero_header {
+  width: 100%;
+  height: 36px;
+  background-color: #4484bc;
+  margin-top: 12px;
+  padding: 0 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.superhero_header > h2 {
+  font-size: 20px;
+}
+
+.superhero_header > span {
+  font-size: 14px;
+}
+
+.superhero_appearance {
+  padding: 12px;
+  display: flex;
+  gap: 16px;
+}
+
+.superhero_image {
+  width: 60px;
+  height: 68px;
+}
+
+.superhero_image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.superhero_appearance > div:nth-child(2) {
+  width: auto;
+}
+
+.superhero_appearance > div:nth-child(2) > span {
+  display: block;
+  font-size: 14px;
+  line-height: 1.28em;
+}
+
+.superhero_biography {
+  border: 1px solid #4484bc;
+  margin: 0 12px 12px;
+  border-radius: 8px;
+  padding: 5px 10px;
+  max-height: 86px;
+  overflow-y: auto;
+}
+
+.superhero_biography > span {
+  display: block;
+  font-size: 14px;
+  line-height: 1.28em;
 }

@@ -30,7 +30,7 @@ const SuperheroCard = ({ type, superhero }) => {
         <div className="card_back">
           <div className="superhero_header">
             <h2>{superhero.name}</h2>
-            <span>{superhero.id}</span>
+            <span>#{superhero.id}</span>
           </div>
           <div className="superhero_appearance">
             <div className="superhero_image">
