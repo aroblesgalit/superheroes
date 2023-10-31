@@ -55,34 +55,46 @@ const SuperheroCard = ({ type, superhero }) => {
           </div>
           <div className="superhero_powerstats">
             <div>
-              <span>STR</span>
-              <div style={{width: `${superhero.powerstats.strength}%`}}></div>
-              <span>{superhero.powerstats.strength}</span>
+              <span className='sh_powerstats_name'>STR</span>
+              <div className='sh_powerstats_value'>
+                <div style={{width: `${superhero.powerstats.strength}%`}} className='superhero_powerstats_bar bg-primary-blue'></div>
+                <span>{superhero.powerstats.strength}</span>
+              </div>
             </div>
             <div>
-              <span>PWR</span>
-              <div style={{width: `${superhero.powerstats.power}%`}}></div>
-              <span>{superhero.powerstats.power}</span>
+              <span className='sh_powerstats_name'>PWR</span>
+              <div className='sh_powerstats_value'>
+                <div style={{width: `${superhero.powerstats.power}%`}} className='superhero_powerstats_bar bg-primary-blue'></div>
+                <span>{superhero.powerstats.power}</span>
+              </div>
             </div>
             <div>
-              <span>CBT</span>
-              <div style={{width: `${superhero.powerstats.combat}%`}}></div>
-              <span>{superhero.powerstats.combat}</span>
+              <span className='sh_powerstats_name'>CBT</span>
+              <div className='sh_powerstats_value'>
+                <div style={{width: `${superhero.powerstats.combat}%`}} className='superhero_powerstats_bar bg-primary-blue'></div>
+                <span>{superhero.powerstats.combat}</span>
+              </div>
             </div>
             <div>
-              <span>INT</span>
-              <div style={{width: `${superhero.powerstats.intelligence}%`}}></div>
-              <span>{superhero.powerstats.intelligence}</span>
+              <span className='sh_powerstats_name'>INT</span>
+              <div className='sh_powerstats_value'>
+                <div style={{width: `${superhero.powerstats.intelligence}%`}} className='superhero_powerstats_bar bg-primary-blue'></div>
+                <span>{superhero.powerstats.intelligence}</span>
+              </div>
             </div>
             <div>
-              <span>SPD</span>
-              <div style={{width: `${superhero.powerstats.speed}%`}}></div>
-              <span>{superhero.powerstats.speed}</span>
+              <span className='sh_powerstats_name'>SPD</span>
+              <div className='sh_powerstats_value'>
+                <div style={{width: `${superhero.powerstats.speed}%`}} className='superhero_powerstats_bar bg-primary-blue'></div>
+                <span>{superhero.powerstats.speed}</span>
+              </div>
             </div>
             <div>
-              <span>DUR</span>
-              <div style={{width: `${superhero.powerstats.durability}%`}}></div>
-              <span>{superhero.powerstats.durability}</span>
+              <span className='sh_powerstats_name'>DUR</span>
+              <div className='sh_powerstats_value'>
+                <div style={{width: `${superhero.powerstats.durability}%`}} className='superhero_powerstats_bar bg-primary-blue'></div>
+                <span>{superhero.powerstats.durability}</span>
+              </div>
             </div>
           </div>
         </div>
