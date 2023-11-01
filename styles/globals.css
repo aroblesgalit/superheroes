@@ -42,6 +42,18 @@ main {
   perspective: 1000px;
 }
 
+.card ::-webkit-scrollbar {
+  width: 8px;
+} 
+
+.card ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.card ::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .card_inner {
   position: relative;
   width: 100%;
@@ -212,7 +224,6 @@ main {
 .superhero_biography {
   border: 1px solid #4484bc;
   margin: 0 12px 12px;
-  border-radius: 8px;
   padding: 5px 10px;
   max-height: 86px;
   overflow-y: auto;
