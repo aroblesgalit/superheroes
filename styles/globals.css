@@ -242,6 +242,7 @@ main {
   flex-direction: column;
   justify-content: center;
   flex: 1;
+  position: relative;
 }
 
 .superhero_powerstats > div,
@@ -270,4 +271,10 @@ main {
 
 .sh_powerstats_value > span {
   min-width: 16px;
+}
+
+.superhero_powerstats > svg {
+  position: absolute;
+  right: 5px;
+  top: 50%;
 }

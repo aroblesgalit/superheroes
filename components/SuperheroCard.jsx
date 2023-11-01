@@ -100,6 +100,11 @@ const SuperheroCard = ({ type, superhero }) => {
                 <span>{superhero.powerstats.durability}</span>
               </div>
             </div>
+            <FontAwesomeIcon
+              icon={faRepeat}
+              className='fas fa-repeat color-primary-white cursor-pointer text-sm'
+              onClick={() => setFlipped(prev => !prev)}
+            />
           </div>
         </div>
       </div>

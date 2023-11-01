@@ -32,7 +32,7 @@ const Collection = () => {
     }
   }
   return (
-    <section className='md:px-10 px-2 py-3 w-full max-w-7xl'>
+    <section className='md:px-10 px-2 py-3 w-full max-w-7xl mx-auto'>
       <div className='flex items-center gap-6'>
         <h1 className='page_title'>Search superheroes</h1>
         <SearchBar
