@@ -14,6 +14,28 @@ const Collection = () => {
     searchResults: [],
   });
 
+  const addSuperheroes = async (superheroes) => {
+    try {
+      superheroes.forEach( async (superhero, index) => {
+        const response = await fetch(`/api/superheroes/${superhero.id}`);
+        const data = await response.json();
+
+        if (!data.length) {
+          const newSuperhero = await fetch(`/api/superheroes/${superhero.id}`, {
+            method: 'POST',
+            body: JSON.stringify(superhero)
+          });
+
+          if (newSuperhero.ok) {
+            console.log('New Superhero added to the DB.')
+          }
+        }
+      })
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
+
   const searchSuperheroes = async (e) => {
     e.preventDefault();
 
@@ -21,16 +43,20 @@ const Collection = () => {
 
       const response = await fetch(`/api/superheroes/search/${query}`);
       const data = await response.json();
-      console.log(data.results);
       setSuperheroes({
         ...superheroes,
         searchResults: data.results
       })
+
+      addSuperheroes(data.results);
       
     } catch (error) {
       console.error(error.message);
     }
   }
+
+  
+
   return (
     <section className='md:px-10 px-2 py-3 w-full max-w-7xl mx-auto'>
       <div className='flex items-center gap-6'>
