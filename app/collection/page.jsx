@@ -14,27 +14,27 @@ const Collection = () => {
     searchResults: [],
   });
 
-  const addSuperheroes = async (superheroes) => {
-    try {
-      superheroes.forEach( async (superhero, index) => {
-        const response = await fetch(`/api/superheroes/${superhero.id}`);
-        const data = await response.json();
+  // const addSuperheroes = async (superheroes) => {
+  //   try {
+  //     superheroes.forEach( async (superhero, index) => {
+  //       const response = await fetch(`/api/superheroes/${superhero.id}`);
+  //       const data = await response.json();
 
-        if (!data.length) {
-          const newSuperhero = await fetch(`/api/superheroes/${superhero.id}`, {
-            method: 'POST',
-            body: JSON.stringify(superhero)
-          });
+  //       if (!data.length) {
+  //         const newSuperhero = await fetch(`/api/superheroes/${superhero.id}`, {
+  //           method: 'POST',
+  //           body: JSON.stringify(superhero)
+  //         });
 
-          if (newSuperhero.ok) {
-            console.log('New Superhero added to the DB.')
-          }
-        }
-      })
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
+  //         if (newSuperhero.ok) {
+  //           console.log('New Superhero added to the DB.')
+  //         }
+  //       }
+  //     })
+  //   } catch (error) {
+  //     console.error(error.message)
+  //   }
+  // }
 
   const searchSuperheroes = async (e) => {
     e.preventDefault();
@@ -48,7 +48,8 @@ const Collection = () => {
         searchResults: data.results
       })
 
-      addSuperheroes(data.results);
+      if (!data.results.length) return;
+      // addSuperheroes(data.results);
       
     } catch (error) {
       console.error(error.message);
