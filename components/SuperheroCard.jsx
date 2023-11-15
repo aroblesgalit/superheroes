@@ -54,7 +54,7 @@ const SuperheroCard = ({ type, superhero }) => {
           </div>
           <div className="superhero_biography">
             <span>Full name: {superhero.biography['full-name']}</span>
-            <span>Aliases: {superhero.biography.aliases.join(', ')}</span>
+            <span>Alliases: {superhero.biography.alliases}</span>
             <span>Alignment: {superhero.biography.alignment}</span>
           </div>
           <div className="superhero_powerstats">

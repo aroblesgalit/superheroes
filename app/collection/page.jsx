@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
@@ -13,6 +13,21 @@ const Collection = () => {
     db: [],
     searchResults: [],
   });
+
+  const fetchSuperheroes = async () => {
+    const response = await fetch('/api/superheroes');
+    const data = await response.json();
+    console.log(data)
+    setSuperheroes({
+      ...superheroes,
+      db: data,
+      searchResults: data.filter((item, i) => i < 20)
+    })
+  };
+
+  useEffect(() => {
+    fetchSuperheroes();
+  }, []);
 
   // const addSuperheroes = async (superheroes) => {
   //   try {
@@ -50,6 +65,12 @@ const Collection = () => {
 
       if (!data.results.length) return;
       // addSuperheroes(data.results);
+      if (!query) {
+        setSuperheroes({
+          ...superheroes,
+          searchResults: superheroes.db.filter((item, i) => i < 20)
+        })
+      }
       
     } catch (error) {
       console.error(error.message);

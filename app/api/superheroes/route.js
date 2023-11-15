@@ -5,7 +5,7 @@ export const GET = async (request) => {
   try {
     await connectToDB();
 
-    const superheroes = await Superhero.find({});
+    const superheroes = await Superhero.find({}).sort({ name: 1 });
 
     return new Response(JSON.stringify(superheroes), { status: 200 });
   } catch (error) {
