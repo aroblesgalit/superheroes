@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import SearchBar from '@components/SearchBar';
 import SuperheroCards from '@components/SuperheroCards';
@@ -22,11 +24,11 @@ const Collection = () => {
   const fetchSuperheroes = async () => {
     const response = await fetch('/api/superheroes');
     const data = await response.json();
-    setSuperheroes({
-      ...superheroes,
+    setSuperheroes(prevState => ({
+      ...prevState,
       db: data,
       searchResults: data
-    });
+    }));
     createPages(data);
     updateViewList(1, data);
   };
@@ -65,19 +67,20 @@ const Collection = () => {
       const response = await fetch(`/api/superheroes/search/${query}`);
       const data = await response.json();
       console.log(data)
-      setSuperheroes({
-        ...superheroes,
+      setSuperheroes(prevState => ({
+        ...prevState,
         searchResults: data.results
-      });
+      }));
       updateViewList(1, data.results);
+      createPages(data.results);
 
       if (!data.results.length) return;
       addSuperheroes(data.results);
       if (!query) {
-        setSuperheroes({
-          ...superheroes,
+        setSuperheroes(prevState => ({
+          ...prevState,
           searchResults: []
-        })
+        }));
       }
       
     } catch (error) {
@@ -97,11 +100,12 @@ const Collection = () => {
     for (let i = min; i <= max; i++) {
       if (!results[i]) return;
       tempViewList.push(results[i]);
-      setSuperheroes({
-        ...superheroes,
-        inViews: tempViewList
-      });
     }
+    setSuperheroes(prevState => ({
+      ...prevState,
+      inViews: tempViewList
+    }))
+    console.log('inViews: ', tempViewList);
   }
 
   // Creates list of pages
@@ -111,38 +115,42 @@ const Collection = () => {
     for (let i = 1; i < total + 1; i++) {
       tempPages.push(i);
     }
-    setPagination({
-      ...pagination,
+    setPagination(prevState => ({
+      ...prevState,
       pages: tempPages
-    })
+    }));
   }
 
   // Controls pagination
   function nextPage() {
     const isLastPage = pagination.current === pagination.pages[pagination.pages.length - 1];
     if (isLastPage) return;
-    setPagination({
-      ...pagination,
+    setPagination(prevState => ({
+      ...prevState,
       current: pagination.current + 1
-    });
-    updateViewList(pagination.current + 1, superheroes.searchResults)
+    }));
+    updateViewList(pagination.current + 1, superheroes.searchResults);
+    console.log('next page: ', pagination.current + 1);
+    
   }
   function prevPage() {
     const isFirstPage = pagination.current === 1;
     if (isFirstPage) return;
-    setPagination({
-      ...pagination,
+    setPagination(prevState => ({
+      ...prevState,
       current: pagination.current - 1
-    });
-    updateViewList(pagination.current - 1, superheroes.searchResults)
+    }));
+    updateViewList(pagination.current - 1, superheroes.searchResults);
+    console.log('previous page: ', pagination.current - 1);
+    
   }
   function goToPage(page) {
     const isValid = superheroes.searchResults.includes(parseInt(page));
     if (!isValid) return;
-    setPagination({
-      ...pagination,
+    setPagination(prevState => ({
+      ...prevState,
       current: parseInt(page)
-    });
+    }));
     updateViewList(parseInt(page), superheroes.searchResults)
   }
 
@@ -161,6 +169,26 @@ const Collection = () => {
         data={superheroes.inViews}
       />
       {/* Pagination */}
+      {
+        pagination.pages.length > 1 && (
+          <div className='flex gap-6 mt-3'>
+            <button>
+              <FontAwesomeIcon
+                icon={faArrowLeft}
+                className='fas fa-2xl'
+                onClick={() => prevPage()}
+              />
+            </button>
+            <button>
+              <FontAwesomeIcon 
+                icon={faArrowRight}
+                className='fas fa-2xl'
+                onClick={() => nextPage()}
+              />
+            </button>
+          </div>
+        )
+      }
     </section>
   )
 }
