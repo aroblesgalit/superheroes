@@ -132,6 +132,15 @@ const Collection = () => {
     });
     updateViewList(pagination.current - 1, superheroes.searchResults)
   }
+  function goToPage(page) {
+    const isValid = superheroes.searchResults.includes(parseInt(page));
+    if (!isValid) return;
+    setPagination({
+      ...pagination,
+      current: parseInt(page)
+    });
+    updateViewList(parseInt(page), superheroes.searchResults)
+  }
 
   return (
     <section className='md:px-10 px-2 py-3 w-full max-w-7xl mx-auto'>
