@@ -106,6 +106,9 @@ const Collection = () => {
       inViews: tempViewList
     }))
     console.log('inViews: ', tempViewList);
+    console.log('results total: ', superheroes.searchResults.length);
+    console.log('pages: ', pagination.pages)
+    // Not working for last page
   }
 
   // Creates list of pages
@@ -123,26 +126,23 @@ const Collection = () => {
 
   // Controls pagination
   function nextPage() {
-    const isLastPage = pagination.current === pagination.pages[pagination.pages.length - 1];
+    const isLastPage = pagination.current == pagination.pages[pagination.pages.length - 1];
+    console.log(isLastPage);
     if (isLastPage) return;
     setPagination(prevState => ({
       ...prevState,
       current: pagination.current + 1
     }));
     updateViewList(pagination.current + 1, superheroes.searchResults);
-    console.log('next page: ', pagination.current + 1);
-    
   }
   function prevPage() {
-    const isFirstPage = pagination.current === 1;
+    const isFirstPage = pagination.current == 1;
     if (isFirstPage) return;
     setPagination(prevState => ({
       ...prevState,
       current: pagination.current - 1
     }));
-    updateViewList(pagination.current - 1, superheroes.searchResults);
-    console.log('previous page: ', pagination.current - 1);
-    
+    updateViewList(pagination.current - 1, superheroes.searchResults);    
   }
   function goToPage(page) {
     const isValid = superheroes.searchResults.includes(parseInt(page));
