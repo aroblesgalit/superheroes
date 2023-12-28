@@ -12,6 +12,11 @@ const Collection = () => {
   const [superheroes, setSuperheroes] = useState({
     db: [],
     searchResults: [],
+    inViews: []
+  });
+  const [pagination, setPagination] = useState({
+    nums: [],
+    current: 1
   });
 
   const fetchSuperheroes = async () => {
