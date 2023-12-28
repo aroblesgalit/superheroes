@@ -25,8 +25,10 @@ const Collection = () => {
     setSuperheroes({
       ...superheroes,
       db: data,
-      searchResults: data.filter((item, i) => i < 20)
-    })
+      searchResults: data
+    });
+    createPages(data);
+    updateViewList(1, data);
   };
 
   useEffect(() => {
@@ -66,14 +68,15 @@ const Collection = () => {
       setSuperheroes({
         ...superheroes,
         searchResults: data.results
-      })
+      });
+      updateViewList(1, data.results);
 
       if (!data.results.length) return;
       addSuperheroes(data.results);
       if (!query) {
         setSuperheroes({
           ...superheroes,
-          searchResults: superheroes.db.filter((item, i) => i < 20)
+          searchResults: []
         })
       }
       
@@ -86,6 +89,7 @@ const Collection = () => {
  
   // Updates list of superheroes in view
   function updateViewList(page, results) {
+    if (!results.length) return;
     let min = (page - 1) * 20;
     let max = min + 19;
     // Only return as much as how many exists
@@ -154,7 +158,7 @@ const Collection = () => {
         />
       </div>
       <SuperheroCards 
-        data={superheroes.searchResults}
+        data={superheroes.inViews}
       />
       {/* Pagination */}
     </section>
