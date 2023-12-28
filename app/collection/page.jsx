@@ -113,6 +113,26 @@ const Collection = () => {
     })
   }
 
+  // Controls pagination
+  function nextPage() {
+    const isLastPage = pagination.current === pagination.pages[pagination.pages.length - 1];
+    if (isLastPage) return;
+    setPagination({
+      ...pagination,
+      current: pagination.current + 1
+    });
+    updateViewList(pagination.current + 1, superheroes.searchResults)
+  }
+  function prevPage() {
+    const isFirstPage = pagination.current === 1;
+    if (isFirstPage) return;
+    setPagination({
+      ...pagination,
+      current: pagination.current - 1
+    });
+    updateViewList(pagination.current - 1, superheroes.searchResults)
+  }
+
   return (
     <section className='md:px-10 px-2 py-3 w-full max-w-7xl mx-auto'>
       <div className='flex items-center gap-6'>
