@@ -27,7 +27,8 @@ const SuperheroCard = ({ type, superhero }) => {
               />
             </div>
             <div className="superhero_alignment">
-              <span>{superhero.biography.alignment == 'good' ? 'hero' : 'villain'}</span>
+              {/* <span>{superhero.biography.alignment == 'good' ? 'hero' : 'villain'}</span> */}
+              <span>#{superhero.id}</span>
             </div>
           </div>
         </div>
@@ -54,7 +55,7 @@ const SuperheroCard = ({ type, superhero }) => {
           </div>
           <div className="superhero_biography">
             <span>Full name: {superhero.biography['full-name']}</span>
-            <span>Alliases: {superhero.biography.alliases}</span>
+            <span>Aliases: {superhero.biography.aliases}</span>
             <span>Alignment: {superhero.biography.alignment}</span>
           </div>
           <div className="superhero_powerstats">

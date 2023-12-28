@@ -26,7 +26,7 @@ const SuperheroSchema = new Schema({
   },
   biography: {
     'full-name': String,
-    alliases: Array,
+    aliases: Array, // Wrong spelling of 'aliases' so it saved wrong in the db
     alignment: String,
     'alter-egos': String,
     'first-appearance': String,

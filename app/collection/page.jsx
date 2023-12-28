@@ -17,7 +17,6 @@ const Collection = () => {
   const fetchSuperheroes = async () => {
     const response = await fetch('/api/superheroes');
     const data = await response.json();
-    console.log(data)
     setSuperheroes({
       ...superheroes,
       db: data,
@@ -29,27 +28,27 @@ const Collection = () => {
     fetchSuperheroes();
   }, []);
 
-  // const addSuperheroes = async (superheroes) => {
-  //   try {
-  //     superheroes.forEach( async (superhero, index) => {
-  //       const response = await fetch(`/api/superheroes/${superhero.id}`);
-  //       const data = await response.json();
+  const addSuperheroes = async (superheroes) => {
+    try {
+      superheroes.forEach( async (superhero, index) => {
+        const response = await fetch(`/api/superheroes/${superhero.id}`);
+        const data = await response.json();
 
-  //       if (!data.length) {
-  //         const newSuperhero = await fetch(`/api/superheroes/${superhero.id}`, {
-  //           method: 'POST',
-  //           body: JSON.stringify(superhero)
-  //         });
+        if (!data.length) {
+          const newSuperhero = await fetch(`/api/superheroes/${superhero.id}`, {
+            method: 'POST',
+            body: JSON.stringify(superhero)
+          });
 
-  //         if (newSuperhero.ok) {
-  //           console.log('New Superhero added to the DB.')
-  //         }
-  //       }
-  //     })
-  //   } catch (error) {
-  //     console.error(error.message)
-  //   }
-  // }
+          if (newSuperhero.ok) {
+            console.log('New Superhero added to the DB.')
+          }
+        }
+      })
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
 
   const searchSuperheroes = async (e) => {
     e.preventDefault();
@@ -58,13 +57,14 @@ const Collection = () => {
 
       const response = await fetch(`/api/superheroes/search/${query}`);
       const data = await response.json();
+      console.log(data)
       setSuperheroes({
         ...superheroes,
         searchResults: data.results
       })
 
       if (!data.results.length) return;
-      // addSuperheroes(data.results);
+      addSuperheroes(data.results);
       if (!query) {
         setSuperheroes({
           ...superheroes,
