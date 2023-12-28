@@ -15,7 +15,7 @@ const Collection = () => {
     inViews: []
   });
   const [pagination, setPagination] = useState({
-    nums: [],
+    pages: [],
     current: 1
   });
 
@@ -82,7 +82,36 @@ const Collection = () => {
     }
   }
 
-  
+  // Pagination
+ 
+  // Updates list of superheroes in view
+  function updateViewList(page, results) {
+    let min = (page - 1) * 20;
+    let max = min + 19;
+    // Only return as much as how many exists
+    let tempViewList = [];
+    for (let i = min; i <= max; i++) {
+      if (!results[i]) return;
+      tempViewList.push(results[i]);
+      setSuperheroes({
+        ...superheroes,
+        inViews: tempViewList
+      });
+    }
+  }
+
+  // Creates list of pages
+  function createPages(results) {
+    const total = Math.ceil(results.length / 20);
+    const tempPages = [];
+    for (let i = 1; i < total + 1; i++) {
+      tempPages.push(i);
+    }
+    setPagination({
+      ...pagination,
+      pages: tempPages
+    })
+  }
 
   return (
     <section className='md:px-10 px-2 py-3 w-full max-w-7xl mx-auto'>
@@ -98,6 +127,7 @@ const Collection = () => {
       <SuperheroCards 
         data={superheroes.searchResults}
       />
+      {/* Pagination */}
     </section>
   )
 }
