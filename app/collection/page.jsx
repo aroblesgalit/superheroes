@@ -167,7 +167,7 @@ const Collection = () => {
       {/* Pagination */}
       {
         pagination.pages.length > 1 && (
-          <div className='flex gap-6 mt-3'>
+          <div className='flex justify-center gap-6 mt-3'>
             <button>
               <FontAwesomeIcon
                 icon={faArrowLeft}
@@ -177,6 +177,7 @@ const Collection = () => {
             </button>
             <input
               type='number'
+              className='text-center rounded w-10 h-10 border border-primary-black'
               value={pagination.current}
               onChange={(e) => goToPage(e.target.value)}
             />
