@@ -13,8 +13,48 @@ const UserSchema = new Schema({
   },
   image: {
     type: String
+  },
+  superheroes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Superhero'
+    }
+  ],
+  rank: {
+    type: Number,
+    default: 0
+  },
+  wins: {
+    type: Number,
+    default: 0
+  },
+  losses: {
+    type: Number,
+    default: 0
+  },
+  totalBattle: {
+    type: Number,
+    default: 0
+  },
+  winsPercent: {
+    type: Number,
+    default: 0
   }
 });
+
+function arrayLimit(val) {
+  return val.length <= 3;
+}
+
+UserSchema.methods.calcTotalBattle = function() {
+  this.totalBattle = this.wins + this.losses;
+  return this.totalBattle;
+}
+
+UserSchema.methods.caclWinsPercent = function() {
+  this.winsPercent = ((this.wins / this.totalBattle) * 100).toFixed();
+  return this.winsPercent;
+}
 
 // The "models" object is provided by the Mongoose library and stores all the registered models.
 // If a model named "User" already exists in the "models" object, it assigns that existing model to the "User" variable.
