@@ -106,10 +106,6 @@ const Collection = () => {
         inViews: tempViewList
       }))
     }
-    
-    console.log('results total: ', superheroes.searchResults.length);
-    console.log('pages: ', pagination.pages)
-    // Not working for last page
   }
 
   // Creates list of pages
@@ -128,16 +124,12 @@ const Collection = () => {
   // Controls pagination
   function nextPage() {
     const isLastPage = pagination.current == pagination.pages[pagination.pages.length - 1];
-    console.log('is last page: ', isLastPage)
     if (isLastPage) return;
-    console.log('current1: ', pagination.current + 1);
-    
     setPagination(prevState => ({
       ...prevState,
       current: pagination.current + 1
     }));
     updateViewList(pagination.current + 1, superheroes.searchResults);
-    console.log('current2: ', pagination.current + 1)
   }
   function prevPage() {
     const isFirstPage = pagination.current == 1;
@@ -149,7 +141,7 @@ const Collection = () => {
     updateViewList(pagination.current - 1, superheroes.searchResults);    
   }
   function goToPage(page) {
-    const isValid = superheroes.searchResults.includes(parseInt(page));
+    const isValid = pagination.pages.includes(parseInt(page));
     if (!isValid) return;
     setPagination(prevState => ({
       ...prevState,
@@ -183,6 +175,11 @@ const Collection = () => {
                 onClick={() => prevPage()}
               />
             </button>
+            <input
+              type='number'
+              value={pagination.current}
+              onChange={(e) => goToPage(e.target.value)}
+            />
             <button>
               <FontAwesomeIcon 
                 icon={faArrowRight}
