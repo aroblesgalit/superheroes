@@ -48,6 +48,18 @@ const SuperheroSchema = new Schema({
   work: {
     base: String,
     occupation: String
+  },
+  attack: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 10
+  },
+  defense: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 10
   }
 });
 
