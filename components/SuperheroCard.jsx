@@ -7,16 +7,37 @@ import Image from 'next/image';
 
 const SuperheroCard = ({ type, superhero }) => {
   const [flipped, setFlipped] = useState(false);
+  const [imgSrc, setImgSrc] = useState(superhero.image.url);
 
   function calcStat(val) {
     return parseInt(val) * .8;
+  }
+
+  async function renderNewImg() {
+    // Check if image is broken
+    try {
+      let responsePixabay = await fetch(`/api/pixabay/search/${superhero.name}`);
+      let dataPixabay;
+      if (responsePixabay.ok) {
+        dataPixabay = await responsePixabay.json();
+        setImgSrc(dataPixabay);
+      } else {
+        responsePixabay = await fetch(`/api/pixabay/search/${superhero.name.split(' ').join()}`);
+        dataPixabay = await responsePixabay.json();
+        setImgSrc(dataPixabay);
+      }
+      
+    } catch (error) {
+      console.error(error.message)
+    }
+    
   }
 
   return (
     <div className={`card ${flipped && 'flip'}`}>
       <div className="card_inner">
         <div className="card_front">
-          <div className="superhero_main" style={{ backgroundImage: `url(${superhero.image.url})` }}>
+          <div className="superhero_main" style={{ backgroundImage: `url(${imgSrc})` }}>
             <div className="top_left_dec">
               {/* TypeError: Cannot read properties of undefined (reading 'attack') */}
               <span>ATK: {superhero.battlestats.attack} / DEF: {superhero.battlestats.defense}</span>
@@ -43,10 +64,11 @@ const SuperheroCard = ({ type, superhero }) => {
           <div className="superhero_appearance">
             <div className="superhero_image">
               <Image
-                src={superhero.image.url}
+                src={imgSrc}
                 alt={superhero.name}
                 width={60}
                 height={68}
+                onError={() => renderNewImg()}
               />
             </div>
             <div>

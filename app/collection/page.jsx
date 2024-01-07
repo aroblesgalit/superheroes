@@ -43,10 +43,6 @@ const Collection = () => {
     )
   }
 
-  function checkImage(url) {
-    
-  }
-
   const addSuperheroes = async (superheroes) => {
     try {
       superheroes.forEach( async (superhero, index) => {
@@ -92,14 +88,14 @@ const Collection = () => {
           superhero.battlestats = battlestats;
           
         }
-        // Check if image is broken
-        let image = new Image();
-        image.src = superhero.image.url;
-        image.onerror = async function() {
-          const responsePixabay = await fetch(`/api/pixabay/search/${superhero.name}`);
-          const dataPixabay = await responsePixabay.json();
-          superhero.image.url = dataPixabay;
-        }
+        // // Check if image is broken
+        // let image = new Image();
+        // image.src = superhero.image.url;
+        // image.onerror = async function() {
+        //   const responsePixabay = await fetch(`/api/pixabay/search/${superhero.name}`);
+        //   const dataPixabay = await responsePixabay.json();
+        //   superhero.image.url = dataPixabay;
+        // }
       });
       setSuperheroes(prevState => ({
         ...prevState,
