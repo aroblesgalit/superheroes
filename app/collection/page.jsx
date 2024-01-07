@@ -43,6 +43,10 @@ const Collection = () => {
     )
   }
 
+  function checkImage(url) {
+    
+  }
+
   const addSuperheroes = async (superheroes) => {
     try {
       superheroes.forEach( async (superhero, index) => {
@@ -74,25 +78,40 @@ const Collection = () => {
 
       const response = await fetch(`/api/superheroes/search/${query}`);
       const data = await response.json();
-
+      console.log('step 1...')
       data.results.forEach( async (superhero, index) => {
-        if ('battlestats' in superhero) return;
-        // Generate attack and defense and add to data
-        const {strength, power, combat, intelligence, speed, durability} = superhero.powerstats;
-        const attackValues = [strength, power, combat];
-        const defenseValues = [intelligence, speed, durability];
-        const battlestats = {
-          attack: generateBattleStat(attackValues),
-          defense: generateBattleStat(defenseValues)
+        
+        if (!('battlestats' in superhero)) {
+          // Generate attack and defense and add to data
+          const {strength, power, combat, intelligence, speed, durability} = superhero.powerstats;
+          const attackValues = [strength, power, combat];
+          const defenseValues = [intelligence, speed, durability];
+          const battlestats = {
+            attack: generateBattleStat(attackValues),
+            defense: generateBattleStat(defenseValues)
+          }
+          superhero.battlestats = battlestats;
+          
         }
-        superhero.battlestats = battlestats;
+        // Check if image is broken
+        let image = new Image();
+        image.src = superhero.image.url;
+        image.onload = function() {
+          console.log('image exsits')
+        }
+        image.onerror = function() {
+          console.log('image not found');
+          superhero.image.url = 'null';
+        }
+        console.log('step 2...');
       });
+      console.log('step 3...')
       console.log(data.results);
-      
       setSuperheroes(prevState => ({
         ...prevState,
         searchResults: data.results
       }));
+      console.log('step 4...')
       updateViewList(1, data.results);
       createPages(data.results);
 
