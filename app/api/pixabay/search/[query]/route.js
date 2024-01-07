@@ -9,7 +9,8 @@ export const GET = async (request, { params }) => {
     if (!response) return new Response('Pixabay image not found', { status: 404 });
 
     const data = await response.json();
-    return new Response(JSON.stringify(data.hits[1].webformatURL), { status: 200 });
+    const index = Math.floor(Math.random() * data.hits.length);
+    return new Response(JSON.stringify(data.hits[index].webformatURL), { status: 200 });
 
   } catch (error) {
     return new Response('Failed to fetch from Pixabay', { status: 500 });
