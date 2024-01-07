@@ -51,13 +51,16 @@ const Collection = () => {
         const data = await response.json();
         // If not found in DB
         if (!data.length) {
-          // Generate attack and defense
+          // Generate attack and defense and add to data
           const powerstats = superhero.powerstats;
           const attackValues = [parseInt(powerstats.strength), parseInt(powerstats.power), parseInt(powerstats.combat)];
           const defenseValues = [parseInt(powerstats.intelligence), parseInt(powerstats.speed), parseInt(powerstats.durability)];
-          superhero.battleStats.attack = generateBattleStat(attackValues);
-          superhero.battleStats.defense = generateBattleStat(defenseValues);
-          console.log(superhero)
+          const battleStats = {
+            attack: generateBattleStat(attackValues),
+            defense: generateBattleStat(defenseValues)
+          }
+          superhero.battleStats = battleStats;
+          // Save superhero to DB
           const newSuperhero = await fetch(`/api/superheroes/${superhero.id}`, {
             method: 'POST',
             body: JSON.stringify(superhero)
