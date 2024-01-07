@@ -17,7 +17,9 @@ const SuperheroCard = ({ type, superhero }) => {
       <div className="card_inner">
         <div className="card_front">
           <div className="superhero_main" style={{ backgroundImage: `url(${superhero.image.url})` }}>
-            <div className="top_left_dec"></div>
+            <div className="top_left_dec">
+              <span>ATK:{superhero.battleStats.attack} / DEF: {superhero.battleStats.defense}</span>
+            </div>
             <div className="superhero_name">
               <h2 className='w-3/4'>{superhero.name}</h2>
               <FontAwesomeIcon

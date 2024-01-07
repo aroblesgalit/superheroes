@@ -104,8 +104,8 @@ input[type=number] {
 }
 
 .top_left_dec {
-  height: 10px;
-  width: 30%;
+  height: 18px;
+  width: 36%;
   background-color: #4484bc;
   position: absolute;
   top: -3px;
@@ -126,6 +126,14 @@ input[type=number] {
   border-left: 0;
   transform-origin: bottom;
   transform: skew(-45deg);
+}
+
+.top_left_dec > span {
+  font-size: .75rem;
+  position: absolute;
+  top: -3px;
+  left: 2px;
+  z-index: 3;
 }
 
 .superhero_name {
