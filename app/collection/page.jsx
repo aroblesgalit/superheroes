@@ -99,9 +99,12 @@ const Collection = () => {
         image.onload = function() {
           console.log('image exsits')
         }
-        image.onerror = function() {
+        image.onerror = async function() {
           console.log('image not found');
-          superhero.image.url = 'null';
+          console.log(superhero.name.split(' ').join('+'));
+          const responsePixabay = await fetch(`/api/pixabay/search/${superhero.name}`);
+          const dataPixabay = await responsePixabay.json();
+          console.log(dataPixabay);
         }
         console.log('step 2...');
       });
