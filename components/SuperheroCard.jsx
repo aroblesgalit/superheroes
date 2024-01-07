@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRepeat } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 
-const SuperheroCard = ({ type, superhero }) => {
+const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal }) => {
   const [flipped, setFlipped] = useState(false);
   const [imgSrc, setImgSrc] = useState(superhero.image.url);
 
