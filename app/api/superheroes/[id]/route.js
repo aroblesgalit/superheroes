@@ -15,11 +15,11 @@ export const GET = async (request, { params }) => {
 }
 
 export const POST = async (request) => {
-  const { id, name, image, appearance, biography, powerstats, connections, work } = await request.json();
+  const { id, name, image, appearance, biography, powerstats, connections, work, battleStats } = await request.json();
 
   try {
     await connectToDB();
-    const newSuperhero = new Superhero({ id, name, image, appearance, biography, powerstats, connections, work });
+    const newSuperhero = new Superhero({ id, name, image, appearance, biography, powerstats, connections, work, battleStats });
 
     await newSuperhero.save();
     return new Response(JSON.stringify(newSuperhero), { status: 201 });

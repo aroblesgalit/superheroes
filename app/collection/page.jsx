@@ -37,13 +37,27 @@ const Collection = () => {
     fetchSuperheroes();
   }, []);
 
+  function generateBattleStat(powerstats) {
+    return powerstats.includes('null') ? 'null' : (
+      (powerstats.reduce((a, b) => a + b, 0) / 30).toFixed()
+    )
+  }
+
   const addSuperheroes = async (superheroes) => {
     try {
       superheroes.forEach( async (superhero, index) => {
+        // Fetch each superhero
         const response = await fetch(`/api/superheroes/${superhero.id}`);
         const data = await response.json();
-
+        // If not found in DB
         if (!data.length) {
+          // Generate attack and defense
+          const powerstats = superhero.powerstats;
+          const attackValues = [parseInt(powerstats.strength), parseInt(powerstats.power), parseInt(powerstats.combat)];
+          const defenseValues = [parseInt(powerstats.intelligence), parseInt(powerstats.speed), parseInt(powerstats.durability)];
+          superhero.battleStats.attack = generateBattleStat(attackValues);
+          superhero.battleStats.defense = generateBattleStat(defenseValues);
+          console.log(superhero)
           const newSuperhero = await fetch(`/api/superheroes/${superhero.id}`, {
             method: 'POST',
             body: JSON.stringify(superhero)
@@ -66,7 +80,7 @@ const Collection = () => {
 
       const response = await fetch(`/api/superheroes/search/${query}`);
       const data = await response.json();
-      console.log(data)
+      
       setSuperheroes(prevState => ({
         ...prevState,
         searchResults: data.results

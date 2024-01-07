@@ -49,17 +49,15 @@ const SuperheroSchema = new Schema({
     base: String,
     occupation: String
   },
-  attack: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 10
-  },
-  defense: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 10
+  battleStats: {
+    attack: {
+      type: Schema.Types.Mixed,
+      required: true
+    },
+    defense: {
+      type: Schema.Types.Mixed,
+      required: true
+    }
   }
 });
 
