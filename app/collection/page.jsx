@@ -78,7 +78,6 @@ const Collection = () => {
 
       const response = await fetch(`/api/superheroes/search/${query}`);
       const data = await response.json();
-      console.log('step 1...')
       data.results.forEach( async (superhero, index) => {
         
         if (!('battlestats' in superhero)) {
@@ -96,25 +95,16 @@ const Collection = () => {
         // Check if image is broken
         let image = new Image();
         image.src = superhero.image.url;
-        image.onload = function() {
-          console.log('image exsits')
-        }
         image.onerror = async function() {
-          console.log('image not found');
-          console.log(superhero.name.split(' ').join('+'));
           const responsePixabay = await fetch(`/api/pixabay/search/${superhero.name}`);
           const dataPixabay = await responsePixabay.json();
-          console.log(dataPixabay);
+          superhero.image.url = dataPixabay;
         }
-        console.log('step 2...');
       });
-      console.log('step 3...')
-      console.log(data.results);
       setSuperheroes(prevState => ({
         ...prevState,
         searchResults: data.results
       }));
-      console.log('step 4...')
       updateViewList(1, data.results);
       createPages(data.results);
 
