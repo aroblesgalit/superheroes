@@ -18,7 +18,8 @@ const SuperheroCard = ({ type, superhero }) => {
         <div className="card_front">
           <div className="superhero_main" style={{ backgroundImage: `url(${superhero.image.url})` }}>
             <div className="top_left_dec">
-              <span>ATK:{superhero.battleStats.attack} / DEF: {superhero.battleStats.defense}</span>
+              {/* TypeError: Cannot read properties of undefined (reading 'attack') */}
+              <span>ATK: {superhero.battlestats.attack} / DEF: {superhero.battlestats.defense}</span>
             </div>
             <div className="superhero_name">
               <h2 className='w-3/4'>{superhero.name}</h2>

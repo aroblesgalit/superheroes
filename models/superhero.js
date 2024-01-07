@@ -49,7 +49,7 @@ const SuperheroSchema = new Schema({
     base: String,
     occupation: String
   },
-  battleStats: {
+  battlestats: {
     attack: {
       type: Schema.Types.Mixed,
       required: true

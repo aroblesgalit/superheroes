@@ -39,7 +39,7 @@ const Collection = () => {
 
   function generateBattleStat(powerstats) {
     return powerstats.includes('null') ? 'null' : (
-      (powerstats.reduce((a, b) => a + b, 0) / 30).toFixed()
+      (powerstats.reduce((a, b) => parseInt(a) + parseInt(b), 0) / 30).toFixed()
     )
   }
 
@@ -51,15 +51,6 @@ const Collection = () => {
         const data = await response.json();
         // If not found in DB
         if (!data.length) {
-          // Generate attack and defense and add to data
-          const powerstats = superhero.powerstats;
-          const attackValues = [parseInt(powerstats.strength), parseInt(powerstats.power), parseInt(powerstats.combat)];
-          const defenseValues = [parseInt(powerstats.intelligence), parseInt(powerstats.speed), parseInt(powerstats.durability)];
-          const battleStats = {
-            attack: generateBattleStat(attackValues),
-            defense: generateBattleStat(defenseValues)
-          }
-          superhero.battleStats = battleStats;
           // Save superhero to DB
           const newSuperhero = await fetch(`/api/superheroes/${superhero.id}`, {
             method: 'POST',
@@ -83,6 +74,20 @@ const Collection = () => {
 
       const response = await fetch(`/api/superheroes/search/${query}`);
       const data = await response.json();
+
+      data.results.forEach( async (superhero, index) => {
+        if ('battlestats' in superhero) return;
+        // Generate attack and defense and add to data
+        const {strength, power, combat, intelligence, speed, durability} = superhero.powerstats;
+        const attackValues = [strength, power, combat];
+        const defenseValues = [intelligence, speed, durability];
+        const battlestats = {
+          attack: generateBattleStat(attackValues),
+          defense: generateBattleStat(defenseValues)
+        }
+        superhero.battlestats = battlestats;
+      });
+      console.log(data.results);
       
       setSuperheroes(prevState => ({
         ...prevState,
@@ -91,7 +96,7 @@ const Collection = () => {
       updateViewList(1, data.results);
       createPages(data.results);
 
-      if (!data.results.length) return;
+      if (!data.results.length) return; // Do something here if no results
       addSuperheroes(data.results);
       if (!query) {
         setSuperheroes(prevState => ({
