@@ -7,7 +7,10 @@ import Image from 'next/image';
 
 const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal }) => {
   const [flipped, setFlipped] = useState(false);
-  const [imgSrc, setImgSrc] = useState(superhero.image.url);
+  const [imgSrc, setImgSrc] = useState({
+    url: superhero.image.url,
+    isPixabay: false
+  });
 
   function calcStat(val) {
     return parseInt(val) * .8;
@@ -17,7 +20,10 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
     try {
       // Check if image has already been fetched before from Pixabay API
       if (superhero.id in pixabay) {
-        setImgSrc(pixabay[superhero.id]);
+        setImgSrc({
+          url: pixabay[superhero.id],
+          isPixabay: true
+        });
       } else {
         let responsePixabay = await fetch(`/api/pixabay/search/${superhero.name}`);
         let dataPixabay;
@@ -29,7 +35,10 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
           dataPixabay = await responsePixabay.json();
         }
         // Set the image url to Pixabay's
-        setImgSrc(dataPixabay);
+        setImgSrc({
+          url: dataPixabay,
+          isPixabay: true
+        });
         // Update pixabay object with new data
         setPixabay(prevState => ({
           ...prevState,
@@ -50,7 +59,7 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
     <div className={`card ${flipped && 'flip'}`}>
       <div className="card_inner">
         <div className="card_front">
-          <div className="superhero_main" style={{ backgroundImage: `url(${imgSrc})` }}>
+          <div className="superhero_main" style={{ backgroundImage: `url(${imgSrc.url})` }}>
             <div className="top_left_dec">
               {/* TypeError: Cannot read properties of undefined (reading 'attack') */}
               <span>ATK: {superhero.battlestats.attack} / DEF: {superhero.battlestats.defense}</span>
@@ -77,7 +86,7 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
           <div className="superhero_appearance">
             <div className="superhero_image">
               <Image
-                src={imgSrc}
+                src={imgSrc.url}
                 alt={superhero.name}
                 width={60}
                 height={68}
