@@ -295,3 +295,40 @@ input[type=number] {
   right: 5px;
   top: 50%;
 }
+
+.pixabay-disclaimer {
+
+}
+
+.fa-circle-info {
+  right: 10px;
+}
+
+.pixabay-disclaimer > span {
+  font-size: 12px;
+  bottom: 14px;
+  right: -15px;
+  width: 204px;
+  padding: 5px 10px;
+  background-color: rgba(55, 65, 81, 0.85);
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+}
+
+.pixabay-disclaimer > span::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 28px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(55, 65, 81, 0.85) transparent transparent transparent;
+}
+
+.pixabay-disclaimer:hover > span {
+  opacity: 1;
+  visibility: visible;
+}

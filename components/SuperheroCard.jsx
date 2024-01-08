@@ -68,10 +68,13 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
               <h2 className='w-3/4'>{superhero.name}</h2>
               {
                 imgSrc.isPixabay && (
-                  <FontAwesomeIcon
-                    icon={faCircleInfo}
-                    className='fa-circle-info color-primary-black cursor-pointer self-start pt-2'
-                  />
+                  <div className='pixabay-disclaimer self-start pt-2 relative ml-auto'>
+                    <FontAwesomeIcon
+                      icon={faCircleInfo}
+                      className='fa-circle-info color-primary-black cursor-pointer absolute'
+                    />
+                    <span className='absolute block'>The original image is broken so the current one you're seeing is from Pixabay.</span>
+                  </div>
                 )
               }
               <FontAwesomeIcon
