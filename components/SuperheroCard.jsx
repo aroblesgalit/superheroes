@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRepeat } from '@fortawesome/free-solid-svg-icons';
+import { faRepeat, faCircleInfo, circlein } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 
 const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal }) => {
@@ -66,6 +66,14 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
             </div>
             <div className="superhero_name">
               <h2 className='w-3/4'>{superhero.name}</h2>
+              {
+                imgSrc.isPixabay && (
+                  <FontAwesomeIcon
+                    icon={faCircleInfo}
+                    className='fa-circle-info color-primary-black cursor-pointer self-start pt-2'
+                  />
+                )
+              }
               <FontAwesomeIcon
                 icon={faRepeat}
                 className='fas fa-repeat color-primary-white cursor-pointer text-sm self-start pt-2'

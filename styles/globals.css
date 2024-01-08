@@ -139,7 +139,7 @@ input[type=number] {
 .superhero_name {
   height: 60px;
   width: 100%;
-  padding: 0 10px;
+  padding: 0 6px 0 10px;
   background-color: rgba(55, 65, 81, 0.85);
   position: absolute;
   bottom: 0;
