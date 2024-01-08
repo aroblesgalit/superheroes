@@ -19,7 +19,6 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
       if (superhero.id in pixabay) {
         setImgSrc(pixabay[superhero.id]);
       } else {
-        console.log('new broken image...')
         let responsePixabay = await fetch(`/api/pixabay/search/${superhero.name}`);
         let dataPixabay;
         // Check if image is broken
@@ -29,11 +28,14 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
           responsePixabay = await fetch(`/api/pixabay/search/${superhero.name.split(' ').join()}`);
           dataPixabay = await responsePixabay.json();
         }
+        // Set the image url to Pixabay's
         setImgSrc(dataPixabay);
+        // Update pixabay object with new data
         setPixabay(prevState => ({
           ...prevState,
           [superhero.id]: dataPixabay
         }));
+        // Store new data to local storage
         let tempPixabay = structuredClone(pixabay);
         tempPixabay[superhero.id] = dataPixabay;
         storePixabayLocal(tempPixabay);
