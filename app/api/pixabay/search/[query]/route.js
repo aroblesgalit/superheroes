@@ -2,7 +2,7 @@ export const GET = async (request, { params }) => {
 
   const apiKey = process.env.PIXABAY_API_KEY;
 
-  let queryUrl = `https://pixabay.com/api/?key=${apiKey}&q=${encodeURIComponent(params.query)}&image_type=photo&safesearch=true&orientation=vertical`;
+  let queryUrl = `https://pixabay.com/api/?key=${apiKey}&q=${encodeURIComponent(params.query)}&image_type=photo&safesearch=true&orientation=vertical&per_page=10`;
 
   try {
     const response = await fetch(queryUrl);

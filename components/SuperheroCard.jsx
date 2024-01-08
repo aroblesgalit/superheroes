@@ -14,19 +14,30 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
   }
 
   async function renderNewImg() {
-    // Check if image is broken
     try {
-      let responsePixabay = await fetch(`/api/pixabay/search/${superhero.name}`);
-      let dataPixabay;
-      if (responsePixabay.ok) {
-        dataPixabay = await responsePixabay.json();
-        setImgSrc(dataPixabay);
+      // Check if image has already been fetched before from Pixabay API
+      if (superhero.id in pixabay) {
+        setImgSrc(pixabay[superhero.id]);
       } else {
-        responsePixabay = await fetch(`/api/pixabay/search/${superhero.name.split(' ').join()}`);
-        dataPixabay = await responsePixabay.json();
+        console.log('new broken image...')
+        let responsePixabay = await fetch(`/api/pixabay/search/${superhero.name}`);
+        let dataPixabay;
+        // Check if image is broken
+        if (responsePixabay.ok) {
+          dataPixabay = await responsePixabay.json();
+        } else {
+          responsePixabay = await fetch(`/api/pixabay/search/${superhero.name.split(' ').join()}`);
+          dataPixabay = await responsePixabay.json();
+        }
         setImgSrc(dataPixabay);
+        setPixabay(prevState => ({
+          ...prevState,
+          [superhero.id]: dataPixabay
+        }));
+        let tempPixabay = structuredClone(pixabay);
+        tempPixabay[superhero.id] = dataPixabay;
+        storePixabayLocal(tempPixabay);
       }
-      
     } catch (error) {
       console.error(error.message)
     }

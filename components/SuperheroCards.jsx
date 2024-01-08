@@ -9,13 +9,12 @@ const SuperheroCards = ({ data }) => {
   useEffect(() => {
     let pixabayLocal = JSON.parse(localStorage.getItem('pixabay_local'));
     if (pixabayLocal) {
-      setPixabay(pixabay);
+      setPixabay(pixabayLocal);
     }
   }, []);
 
-  const storePixabayLocal = () => {
-    localStorage.setItem('pixabay_local', JSON.stringify(pixabay))
-    setPixabay(pixabay);
+  const storePixabayLocal = (images) => {
+    localStorage.setItem('pixabay_local', JSON.stringify(images));
   }
 
   return (
