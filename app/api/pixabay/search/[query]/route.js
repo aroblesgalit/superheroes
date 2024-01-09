@@ -10,7 +10,13 @@ export const GET = async (request, { params }) => {
 
     const data = await response.json();
     const index = Math.floor(Math.random() * data.hits.length);
-    return new Response(JSON.stringify(data.hits[index].webformatURL), { status: 200 });
+
+    const rawUrl = data.hits[index].previewURL;
+    const rawUrlArray = rawUrl.split('_');
+    const newDimension = rawUrlArray[1].replace('150', '640');
+    const rawUrlFormatted = rawUrlArray[0].concat('_', newDimension);
+
+    return new Response(JSON.stringify(rawUrlFormatted), { status: 200 });
 
   } catch (error) {
     return new Response('Failed to fetch from Pixabay', { status: 500 });

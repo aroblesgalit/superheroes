@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRepeat, faCircleInfo, circlein } from '@fortawesome/free-solid-svg-icons';
+import { faRepeat, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 
 const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal }) => {
@@ -20,10 +20,11 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
     try {
       // Check if image has already been fetched before from Pixabay API
       if (superhero.id in pixabay) {
-        setImgSrc({
+        setImgSrc((prevState) => ({
+          ...prevState,
           url: pixabay[superhero.id],
           isPixabay: true
-        });
+        }));
       } else {
         let responsePixabay = await fetch(`/api/pixabay/search/${superhero.name}`);
         let dataPixabay;
@@ -35,10 +36,11 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
           dataPixabay = await responsePixabay.json();
         }
         // Set the image url to Pixabay's
-        setImgSrc({
+        setImgSrc((prevState) => ({
+          ...prevState,
           url: dataPixabay,
           isPixabay: true
-        });
+        }));
         // Update pixabay object with new data
         setPixabay(prevState => ({
           ...prevState,
@@ -59,7 +61,7 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
     <div className={`card ${flipped && 'flip'}`}>
       <div className="card_inner">
         <div className="card_front">
-          <div className="superhero_main" style={{ backgroundImage: `url(${imgSrc.url})` }}>
+          <div className="superhero_main" style={{ backgroundImage: `url('${imgSrc.url}')` }}>
             <div className="top_left_dec">
               {/* TypeError: Cannot read properties of undefined (reading 'attack') */}
               <span>ATK: {superhero.battlestats.attack} / DEF: {superhero.battlestats.defense}</span>
@@ -73,7 +75,7 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
                       icon={faCircleInfo}
                       className='fa-circle-info color-primary-black cursor-pointer absolute'
                     />
-                    <span className='absolute block'>The original image is broken so the current one you're seeing is from Pixabay.</span>
+                    <span className='absolute block'>This image is from Pixabay.</span>
                   </div>
                 )
               }
@@ -97,6 +99,7 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
           <div className="superhero_appearance">
             <div className="superhero_image">
               <Image
+                loader={() => imgSrc.url}
                 src={imgSrc.url}
                 alt={superhero.name}
                 width={60}
