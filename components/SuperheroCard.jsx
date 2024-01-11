@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRepeat, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 
-const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal }) => {
+const SuperheroCard = ({ type, superhero }) => {
   const [flipped, setFlipped] = useState(false);
   const [imgSrc, setImgSrc] = useState({
     url: superhero.image.url,
@@ -18,14 +18,6 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
 
   async function renderNewImg() {
     try {
-      // Check if image has already been fetched before from Pixabay API
-      if (superhero.id in pixabay) {
-        setImgSrc((prevState) => ({
-          ...prevState,
-          url: pixabay[superhero.id],
-          isPixabay: true
-        }));
-      } else {
         let responsePixabay = await fetch(`/api/pixabay/search/${superhero.name}`);
         let dataPixabay;
         // Check if image is broken
@@ -33,7 +25,12 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
           dataPixabay = await responsePixabay.json();
         } else {
           responsePixabay = await fetch(`/api/pixabay/search/${superhero.name.split(' ').join()}`);
-          dataPixabay = await responsePixabay.json();
+          if (responsePixabay.ok) {
+            dataPixabay = await responsePixabay.json();
+          } else {
+            responsePixabay = await fetch('/api/pixabay/search/superhero');
+            dataPixabay = await responsePixabay.json();
+          }
         }
         // Set the image url to Pixabay's
         setImgSrc((prevState) => ({
@@ -46,11 +43,6 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
           ...prevState,
           [superhero.id]: dataPixabay
         }));
-        // Store new data to local storage
-        let tempPixabay = structuredClone(pixabay);
-        tempPixabay[superhero.id] = dataPixabay;
-        storePixabayLocal(tempPixabay);
-      }
     } catch (error) {
       console.error(error.message)
     }
@@ -99,7 +91,6 @@ const SuperheroCard = ({ type, superhero, pixabay, setPixabay, storePixabayLocal
           <div className="superhero_appearance">
             <div className="superhero_image">
               <Image
-                loader={() => imgSrc.url}
                 src={imgSrc.url}
                 alt={superhero.name}
                 width={60}
