@@ -19,7 +19,7 @@ const Profile = () => {
         />
       </div>
       <div>
-        <h2>{session?.user.username}</h2>
+        <h2>{session?.user.name}</h2>
       </div>
     </section>
   )
