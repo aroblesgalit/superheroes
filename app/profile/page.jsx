@@ -1,11 +1,22 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 
 const Profile = () => {
   const { data: session } = useSession();
-  console.log(session)
+  const [user, setUser] = useState({});
+
+  const fetchUserData = async () => {
+    const response = await fetch(`/api/user/${session.user.id}`)
+    const data = await response.json();
+    console.log(data);
+  }
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   return (
     <section className='md:px-10 px-2 py-3 w-full max-w-7x1 mx-auto'>
