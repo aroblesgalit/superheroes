@@ -11,7 +11,10 @@ const Profile = () => {
   const fetchUserData = async () => {
     const response = await fetch(`/api/user/${session.user.id}`)
     const data = await response.json();
-    console.log(data);
+    setUser(prevState => ({
+      ...prevState,
+      ...data[0]
+    }));
   }
 
   useEffect(() => {
@@ -22,7 +25,7 @@ const Profile = () => {
     <section className='md:px-10 px-2 py-3 w-full max-w-7x1 mx-auto'>
       <div>
         <Image
-          src={session?.user.image}
+          src={user.image}
           width={80}
           height={80}
           className='rounded-full bg-primary-white'
@@ -30,7 +33,7 @@ const Profile = () => {
         />
       </div>
       <div>
-        <h2>{session?.user.name}</h2>
+        <h2>{user.username}</h2>
       </div>
     </section>
   )
